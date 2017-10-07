@@ -88,3 +88,13 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+//return the name, state, id, and memory usage of all processes.
+//since I can't iterate over the ptable here, call procState in
+//proc.c
+int
+sys_procState(void)
+{
+  procState();
+  return 0;
+}

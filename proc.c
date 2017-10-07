@@ -456,4 +456,36 @@ procdump(void)
   }
 }
 
+// outputs name, process state, process id, and memory
+// usage for every process on the process table
+void
+procState(void)
+{
+  static char *states[] = {
+  [UNUSED]    "unused",
+  [EMBRYO]    "embryo",
+  [SLEEPING]  "sleep ",
+  [RUNNABLE]  "runble",
+  [RUNNING]   "run   ",
+  [ZOMBIE]    "zombie"
+  };
 
+  struct proc *p;
+  char *state;
+  int memory;
+
+  //outputs the headers for the columns we'll be outputting
+  cprintf("Name       State       ID        Memory\n");
+
+  //loops through the entries in the process table
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->state == UNUSED) // Doesn't list unused processes
+      continue;
+    if(p->state >= 0 && p->state < NELEM(states) ) 
+      state = states[p->state];   // ensures that the state is one of the actual states
+    else
+      state = "???";
+    memory = p->sz / 1024; // converts the memory size from bytes to KB
+    cprintf("%s   |   %s    |   %d    |   %dKB\n", p->name, state, p->pid, memory);
+  }
+}

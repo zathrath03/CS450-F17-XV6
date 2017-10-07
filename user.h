@@ -22,6 +22,7 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+int procState(void); //references the system call from the user space
 
 // ulib.c
 int stat(char*, struct stat*);
