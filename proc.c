@@ -488,4 +488,5 @@ procState(void)
     memory = p->sz / 1024; // converts the memory size from bytes to KB
     cprintf("%s   |   %s    |   %d    |   %dKB\n", p->name, state, p->pid, memory);
   }
+  cprintf("\n");
 }
